@@ -8,10 +8,12 @@ export const linkedList = function () {
         return;
       }
 
-      while (head !== null) {
-        head = head.nextNode;
+      let pointer = head;
+
+      while (pointer.nextNode !== null) {
+        pointer = pointer.nextNode;
       }
-      head = newNode;
+      pointer.nextNode = newNode;
     },
     print() {
       return head;
@@ -32,7 +34,7 @@ export const linkedList = function () {
   };
 };
 
-const node = function (value, nextNode) {
+const node = function (value, nextNode = null) {
   return {
     value,
     nextNode,
