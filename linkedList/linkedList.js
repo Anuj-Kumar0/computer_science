@@ -5,7 +5,7 @@ export const linkedList = function () {
       const newNode = node(value);
       if (head === null) {
         head = newNode;
-        return;
+        return newNode;
       }
 
       let pointer = head;
@@ -14,16 +14,43 @@ export const linkedList = function () {
         pointer = pointer.nextNode;
       }
       pointer.nextNode = newNode;
+      return newNode;
     },
-    print() {
-      return head;
-    },
+
     prepend(value) {
       const newNode = node(value);
+      if (head === null) {
+        head = newNode;
+        return newNode;
+      }
+
+      let pointer = head;
+      head = newNode;
+      head.nextNode = pointer;
+      return newNode;
     },
-    size() {},
-    head() {},
-    tail() {},
+    size() {
+      let size = 0;
+      let pointer = head;
+      while (pointer !== null) {
+        pointer = pointer.nextNode;
+        size++;
+      }
+      return size;
+    },
+    head() {
+      return head.value;
+    },
+    tail() {
+      if (head === null) {
+        return null;
+      }
+      let pointer = head;
+      while (pointer.nextNode !== null) {
+        pointer = pointer.nextNode;
+      }
+      return pointer.value;
+    },
     at(index) {},
     pop() {},
     contains(value) {},
@@ -31,6 +58,9 @@ export const linkedList = function () {
     toString() {},
     insertAt(value, index) {},
     removeAt(index) {},
+    print() {
+      return head;
+    },
   };
 };
 
