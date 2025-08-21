@@ -51,8 +51,32 @@ export const linkedList = function () {
       }
       return pointer.value;
     },
-    at(index) {},
-    pop() {},
+    at(index) {
+      if (index === 0) {
+        return head;
+      }
+      let pointer = head;
+      let count = 0;
+      while (count < index) {
+        pointer = pointer.nextNode;
+        count++;
+      }
+      return pointer;
+    },
+    pop() {
+      if (head === null) return null;
+
+      if (head.nextNode === null) {
+        head = null;
+      }
+      let pointer = head;
+      let previousNode = null;
+      while (pointer.nextNode !== null) {
+        previousNode = pointer;
+        pointer = pointer.nextNode;
+      }
+      previousNode.nextNode = null;
+    },
     contains(value) {},
     find(value) {},
     toString() {},
