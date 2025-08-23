@@ -77,13 +77,72 @@ export const linkedList = function () {
       }
       previousNode.nextNode = null;
     },
-    contains(value) {},
-    find(value) {},
-    toString() {},
-    insertAt(value, index) {},
-    removeAt(index) {},
-    print() {
-      return head;
+    contains(value) {
+      let pointer = head;
+
+      while (pointer !== null) {
+        if (pointer.value === value) {
+          return true;
+        }
+        pointer = pointer.nextNode;
+      }
+      return false;
+    },
+    find(value) {
+      let count = 0;
+      let pointer = head;
+      if (head === null) {
+        return null;
+      }
+      while (pointer !== null) {
+        if (pointer.value === value) {
+          return count;
+        }
+        pointer = pointer.nextNode;
+        count++;
+      }
+      return null;
+    },
+    toString() {
+      let string = "";
+      let pointer = head;
+      while (pointer !== null) {
+        string += "(" + " " + pointer.value + " " + ") ->" + " ";
+        pointer = pointer.nextNode;
+      }
+      string += "null" + " ";
+      return string;
+    },
+    insertAt(value, index) {
+      const newNode = node(value);
+      if (index === 0) {
+        this.prepend(value);
+        return;
+      }
+      let pointer = head;
+      let previousNode = null;
+      let count = 0;
+      while (count < index && pointer !== null) {
+        previousNode = pointer;
+        pointer = pointer.nextNode;
+        count++;
+      }
+      previousNode.nextNode = newNode;
+      newNode.nextNode = pointer;
+    },
+    removeAt(index) {
+      let pointer = head;
+      let previousNode = null;
+      let count = 0;
+      if (index === 0) {
+        head = head.nextNode;
+      }
+      while (count < index && pointer !== null) {
+        previousNode = pointer;
+        pointer = pointer.nextNode;
+        count++;
+      }
+      previousNode.nextNode = pointer.nextNode;
     },
   };
 };
