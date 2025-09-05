@@ -46,7 +46,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-let array = [1, 5, 6, 8, 2, 3, 4, 7, 9];
+let array = [1, 5, 6, 8, 2, 3, 9, 7, 4, 1, 5, 6, 8];
 
 const root = buildTree(array);
 prettyPrint(root);
