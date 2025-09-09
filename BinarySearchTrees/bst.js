@@ -220,3 +220,43 @@ function postOrderForEach(root, callback) {
 postOrderForEach(root, (node) => {
   console.log(node.data);
 });
+
+function height(root, value) {
+  let node = find(root, value);
+  if (!node) return null;
+
+  function getHeight(nod, count) {
+    if (nod === null) return count - 1;
+    let maxHeight = Math.max(
+      getHeight(nod.left, count + 1),
+      getHeight(nod.right, count + 1)
+    );
+    return maxHeight;
+  }
+
+  return getHeight(node, 0);
+}
+
+let height1 = height(root, 990);
+console.log(height1);
+
+function depth(root, value) {
+  let depthCount = 0;
+  let current = root;
+
+  while (current !== null) {
+    if (value === current.data) {
+      return depthCount;
+    } else if (value < current.data) {
+      current = current.left;
+    } else if (value > current.data) {
+      current = current.right;
+    }
+
+    depthCount++;
+  }
+  return null;
+}
+
+let depth1 = depth(root, 0);
+console.log(depth1);
