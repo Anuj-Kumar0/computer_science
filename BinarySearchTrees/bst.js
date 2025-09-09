@@ -142,3 +142,81 @@ function find(root, value) {
   }
 }
 find(root, 1270);
+
+function levelOrderForEach(root, callback) {
+  if (!callback) {
+    throw new Error("Callback is not provided");
+  }
+
+  if (root === null) return;
+
+  let queue = [];
+
+  queue.push(root);
+  while (queue.length > 0) {
+    let current = queue.shift();
+
+    callback(current);
+
+    if (current.left !== null) {
+      queue.push(current.left);
+    }
+
+    if (current.right !== null) {
+      queue.push(current.right);
+    }
+  }
+}
+
+levelOrderForEach(root, (node) => {
+  console.log(node.data);
+});
+
+function preOrderForEach(root, callback) {
+  if (root === null) return;
+
+  if (!callback) {
+    throw new Error("Callback is not provided");
+  }
+
+  callback(root);
+
+  preOrderForEach(root.left, callback);
+  preOrderForEach(root.right, callback);
+}
+
+preOrderForEach(root, (node) => {
+  console.log(node.data);
+});
+
+function inOrderForEach(root, callback) {
+  if (root === null) return;
+
+  if (!callback) {
+    throw new Error("Callback is not provided");
+  }
+
+  inOrderForEach(root.left, callback);
+  callback(root);
+  inOrderForEach(root.right, callback);
+}
+
+inOrderForEach(root, (node) => {
+  console.log(node.data);
+});
+
+function postOrderForEach(root, callback) {
+  if (root === null) return;
+
+  if (!callback) {
+    throw new Error("Callback is not provided");
+  }
+
+  postOrderForEach(root.left, callback);
+  postOrderForEach(root.right, callback);
+  callback(root);
+}
+
+postOrderForEach(root, (node) => {
+  console.log(node.data);
+});
