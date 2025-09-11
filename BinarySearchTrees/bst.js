@@ -260,3 +260,34 @@ function depth(root, value) {
 
 let depth1 = depth(root, 0);
 console.log(depth1);
+
+function isBalanced(root) {
+  if (root === null) return true;
+
+  heightLeft = height(root.left);
+  heightRight = height(root.right);
+
+  if (Math.abs(heightLeft - heightRight) > 1) return false;
+  else {
+    return isBalanced(root.left) && isBalanced(root.right);
+  }
+}
+
+let checkBalance = isBalanced(root);
+console.log(checkBalance);
+
+function reBalance(root) {
+  let sortedArray = [];
+  function inOrder(root) {
+    if (root === null) return;
+
+    inOrder(root.left);
+    sortedArray.push(root.data);
+    inOrder(root.right);
+  }
+  inOrder(root);
+  return tree(sortedArray);
+}
+
+let reBalanceTree = reBalance(root);
+prettyPrint(reBalanceTree.root);
