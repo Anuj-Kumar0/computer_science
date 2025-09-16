@@ -1,4 +1,9 @@
-let square = [3, 3];
+const createNode = function (square, parentNode = null) {
+  return {
+    square,
+    parentNode,
+  };
+};
 
 const possibleMoves = [
   [+2, +1],
@@ -22,7 +27,6 @@ function getMoves(square) {
 
     movesArr.push([newX, newY]);
   }
-  console.log(movesArr);
 
   let valid = [];
   for (let i = 0; i < movesArr.length; i++) {
@@ -34,5 +38,41 @@ function getMoves(square) {
   return valid;
 }
 
-const moves = getMoves(square);
-console.log(moves);
+function knightMoves(start, target) {
+  let startNode = createNode(start);
+  let queue = [startNode];
+  let visited = new Set([start]);
+
+  while (queue.length > 0) {
+    let currentNode = queue.shift();
+    let [x, y] = currentNode.square;
+
+    if (x === target[0] && y === target[1]) {
+      return currentNode;
+    }
+
+    let rightMoves = getMoves(currentNode.square);
+
+    for (let rightMove of rightMoves) {
+      if (!visited.has(rightMove)) {
+        visited.add(rightMove);
+
+        let childNode = createNode(rightMove, currentNode);
+        queue.push(childNode);
+      }
+    }
+  }
+}
+
+function createPath(node) {
+  let path = [];
+  while (node !== null) {
+    path.unshift(node.square);
+    node = node.parentNode;
+  }
+  return path;
+}
+
+let traversal = knightMoves([0, 0], [4, 4]);
+let drawPath = createPath(traversal);
+console.log(drawPath);
