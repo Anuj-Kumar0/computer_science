@@ -66,13 +66,16 @@ function knightMoves(start, target) {
 
 function createPath(node) {
   let path = [];
+  let count = 0;
   while (node !== null) {
     path.unshift(node.square);
     node = node.parentNode;
+    count++;
   }
+  console.log(`You made it in ${count - 1} moves`);
   return path;
 }
 
-let traversal = knightMoves([0, 0], [4, 4]);
+let traversal = knightMoves([0, 0], [0, 7]);
 let drawPath = createPath(traversal);
 console.log(drawPath);
